@@ -3,9 +3,10 @@ const pool = require("./connection");
 module.exports.getAll = async () => {
   try {
     let sql = String.raw`
-    select Fil_id as id, Fil_nome as nome, Fil_Desc as descricao, Fil_Trailer as trailer, Fil_Dur as duracao, Pais_nome as pais
-    from filme, pais
-    where Fil_Pais = pais.Pais_id
+    select Fil_id as id, Fil_nome as nome, Fil_Desc as descricao, Fil_Trailer as trailer, Fil_Dur as duracao,  SUM(opi_valor)/ COUNT(opi_valor) as media
+    FROM filme, pessoa, utilizador, opiniao
+    WHERE usr_pessoa=pes_id AND opi_filme=fil_id AND opi_user=usr_id 
+    GROUP BY Fil_id
     `;
     let filmes = await pool.query(sql);
     return { status: 200, dados: filmes };
@@ -18,9 +19,11 @@ module.exports.getAll = async () => {
 module.exports.getFilme = async (id) => {
   try {
     let sql = String.raw`
-      select Fil_id as id, Fil_nome as nome, Fil_Desc as descricao, Fil_Trailer as trailer, Fil_Dur as duracao, Pais_nome as pais
-      from filme, pais
-      where Fil_Pais = pais.Pais_id and Fil_id= ${id}
+    select Fil_id as id, Fil_nome as nome, Fil_Desc as descricao, Fil_Trailer as trailer, Fil_Dur as duracao,  SUM(opi_valor)/ COUNT(opi_valor) as media
+    FROM filme, pessoa, utilizador, opiniao
+    WHERE usr_pessoa=pes_id AND opi_filme=fil_id AND opi_user=usr_id and Fil_id= ${id}
+    GROUP BY Fil_id
+
       `;
     let filmes = await pool.query(sql);
 
