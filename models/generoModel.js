@@ -17,12 +17,12 @@ module.exports.getAll = async () => {
 module.exports.getOne = async (id) => {
   try {
     let sql = String.raw`
-    select Fil_id as id, Fil_nome as nome, Fil_Desc as descricao, Fil_Trailer as trailer, Fil_Dur as duracao, Gen_nome as genero, SUM(opi_valor)/ COUNT(opi_valor) as media
+    select Fil_id as id, Fil_nome as nome, Fil_Desc as descricao, Fil_Trailer as trailer, Fil_Dur as duracao, Fil_Poster as poster, Gen_nome as genero, SUM(opi_valor)/ COUNT(opi_valor) as media
     FROM filme, pessoa, utilizador, opiniao, genero, genero_filme
-    WHERE usr_pessoa=pes_id AND opi_filme=fil_id AND opi_user=usr_id  AND GF_F_id=Fil_id AND GF_G_id=Gen_id AND Gen_id = ${id}
+    WHERE usr_pessoa=pes_id AND opi_filme=fil_id AND opi_user=usr_id  AND GF_F_id=Fil_id AND GF_G_id=Gen_id AND Gen_id = ?
     GROUP BY Fil_nome
     `;
-    let generos = await pool.query(sql);
+    let generos = await pool.query(sql, [id]);
 
     if (generos == null || generos.length == 0) {
       console.log("falhou");
