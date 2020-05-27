@@ -36,3 +36,37 @@ module.exports.getFilme = async (id) => {
     return { status: 500, dados: err };
   }
 };
+
+module.exports.postFilme = async (filme) => {
+  try {
+    let FilmeSql = String.raw`
+    insert into filme (Fil_nome,Fil_Desc,Fil_Trailer,Fil_Pais,Fil_Dur,Fil_Poster)
+    values (?,?,?,?,?,?);
+      `;
+    let filmes = await pool.query(FilmeSql, [
+      filme.nome,
+      filme.desc,
+      filme.trailer,
+      filme.pais,
+      filme.duracao,
+      filme.poster,
+    ]);
+
+    console.log(filmes.insertId);
+
+    let CategoriaSql = String.raw`
+    Insert into Genero_Filme(GF_F_id,GF_G_id) Values (?, ?);
+    `;
+
+    filme.categorias.map(async (categoria) => {
+      let cat = parseInt(categoria);
+      let setCategoria = await pool.query(CategoriaSql, [filmes.insertId, cat]);
+      console.log(setCategoria);
+    });
+
+    return { status: 200, dados: { filmes } };
+  } catch (err) {
+    console.log(err);
+    return { status: 500, dados: err };
+  }
+};
