@@ -19,6 +19,7 @@ router.get("/:id", async (req, res, next) => {
     res.status(resultado.status).json(resultado.dados);
   }
 });
+
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, path.join(__dirname, "../public/images"));
@@ -42,7 +43,7 @@ router.post("/", upload.single("poster"), async (req, res, next) => {
     poster: `/images/${req.file.filename}`,
   };
   let resultado = await filmeModel.postFilme(filme);
-  res.status(200).json("Published Movie");
+  res.status(200).json("Filme Guardado");
 });
 
 module.exports = router;
