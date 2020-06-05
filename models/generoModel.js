@@ -4,7 +4,7 @@ module.exports.getAll = async () => {
   try {
     let sql = String.raw`
     select Gen_id as id, Gen_nome as nome
-    from genero
+    from genero 
     `;
     let generos = await pool.query(sql);
     return { status: 200, dados: generos };
