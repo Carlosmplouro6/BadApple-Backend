@@ -10,8 +10,8 @@ module.exports.getAll = async () => {
 
     let PontuacaoSql = String.raw`
     SELECT SUM(opi_valor)/COUNT(opi_valor) "media"
-    FROM filme, pessoa, utilizador, opiniao
-    WHERE usr_pessoa=pes_id AND opi_filme=fil_id AND opi_user= usr_id AND Fil_id= ?
+    FROM filme, utilizador, opiniao
+    WHERE  opi_filme=fil_id AND opi_user= usr_id AND Fil_id= ?
     GROUP BY Fil_nome
     `;
     let filmesP = [];
@@ -55,8 +55,8 @@ module.exports.getFilme = async (id) => {
     }
     let PontuacaoSql = String.raw`
     SELECT SUM(opi_valor)/COUNT(opi_valor) "media"
-    FROM filme, pessoa, utilizador, opiniao
-    WHERE usr_pessoa=pes_id AND opi_filme=fil_id AND opi_user= usr_id AND Fil_id= ?
+    FROM filme, utilizador, opiniao
+    WHERE  opi_filme=fil_id AND opi_user= usr_id AND Fil_id= ?
     GROUP BY Fil_nome
     `;
     let filmesP = [];

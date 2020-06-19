@@ -1,0 +1,267 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --main-red-color: rgb(187, 42, 42);
+  --header-bg-color: #202125;
+  --cat-bg-color: #363740;
+  --film-bg-color: #f7f8fc;
+}
+
+body {
+  overflow: hidden;
+  font-family: "Roboto Slab", serif;
+}
+
+.header {
+  height: 7vh;
+  background-color: var(--header-bg-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo img {
+  margin-left: 1rem;
+  font-size: 40px;
+  width: 4rem;
+}
+
+ul {
+  display: flex;
+  list-style: none;
+  margin-right: 1rem;
+}
+
+li {
+  margin-right: 2rem;
+}
+li a {
+  text-decoration: none;
+  color: var(--film-bg-color);
+  font-size: 2rem;
+}
+
+#menuToggle input {
+  display: none;
+}
+
+.pageContainer {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.mainContainer {
+  display: flex;
+  width: 100vw;
+  height: 93vh;
+}
+
+.categorias {
+  background-color: var(--cat-bg-color);
+  width: 13vw;
+  display: flex;
+  flex-direction: column;
+  overflow: scroll;
+}
+
+.categoriaButton {
+  height: 3rem;
+  margin-top: 0.5rem;
+  width: 110%;
+  background-color: transparent;
+  border: none;
+  font-size: 2rem;
+  transition: ease-in 0.4s;
+}
+
+.ativo {
+  color: var(--main-red-color);
+  text-decoration: var(--main-red-color) underline;
+  transition: ease-in 0.4s;
+}
+
+.filmesContainer {
+  background-color: var(--film-bg-color);
+  height: 93vh;
+  width: 87vw;
+  display: grid;
+  overflow: scroll;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: auto;
+  gap: 2vw;
+  padding-left: 1vw;
+  padding-top: 1vw;
+}
+
+.catTitle {
+  font-size: 3rem;
+}
+
+.filmeCard {
+  width: 15vw;
+  height: 40vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.filmeCard:last-child {
+  margin-bottom: 2rem;
+}
+
+.poster {
+  position: relative;
+  width: inherit;
+  height: inherit;
+}
+
+.pontuação {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-left: auto;
+  text-align: end;
+  width: 2rem;
+  height: 2rem;
+  padding-right: 0.5rem;
+  padding-top: 0.5rem;
+  color: white;
+}
+
+.titulo {
+  position: absolute;
+  bottom: 0;
+  width: inherit;
+  background-color: black;
+  text-align: center;
+  color: white;
+}
+
+::-webkit-scrollbar {
+  background-color: inherit;
+  width: 10px;
+  height: 0;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--main-red-color);
+  border-radius: 10px;
+}
+
+.pBad {
+  background-color: red;
+}
+.pMedium {
+  background-color: yellow;
+  color: black;
+}
+.pGood {
+  background-color: green;
+}
+
+.pNull {
+  background-color: grey;
+}
+
+.hativo {
+  color: var(--main-red-color);
+  text-decoration: var(--main-red-color) underline;
+}
+
+@media (max-width: 750px) {
+  span {
+    position: relative;
+    top: -23px;
+    right: 0px;
+    display: block;
+    width: 2.2rem;
+    height: 0.3rem;
+    margin-bottom: 6px;
+    margin-right: 6px;
+    border-radius: 3px;
+    background: rgb(230, 27, 27);
+    z-index: 4;
+    transform-origin: 0px 0px;
+    transition: transform 0.5s ease, background 0.5s ease, opacity 0.55s ease;
+  }
+  span:first-child {
+    transform-origin: 0% 0%;
+  }
+  span:nth-last-child(2) {
+    transform-origin: 0% 100%;
+  }
+  #menuToggle input {
+    position: relative;
+    top: 12px;
+    right: 7px;
+    display: block !important;
+    width: 3rem;
+    height: 3rem;
+    cursor: pointer;
+    opacity: 0;
+    z-index: 5;
+  }
+
+  input:checked ~ span {
+    opacity: 1;
+    transform: rotate(45deg) translate(-2px, -1px);
+    background: rgb(230, 27, 27);
+  }
+
+  input:checked ~ span:nth-last-child(3) {
+    opacity: 0;
+    transform: rotate(0deg) scale(0.2, 0.2);
+  }
+  input:checked ~ span:nth-last-child(2) {
+    transform: rotate(-45deg) translate(0, -1px);
+  }
+
+  .menu {
+    position: absolute;
+    top: 0px;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+
+    transform: translate(0, -100%);
+    background-color: rgb(43, 43, 43);
+    transition: all 0.4s ease-in;
+    z-index: 3;
+    opacity: 0;
+  }
+  input:checked ~ ul {
+    transform: translate(0, 0);
+    opacity: 1;
+  }
+
+  ul {
+    flex-direction: column;
+    justify-content: space-evenly;
+  }
+
+  .categorias {
+    width: 35vw;
+  }
+
+  .filmesContainer {
+    width: 70vw;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 1vw;
+    padding-left: 0.3rem;
+  }
+
+  .catTitle {
+    grid-column: span 2;
+    font-size: 3rem;
+  }
+
+  .filmeCard {
+    width: 55vw;
+    height: 40vh;
+  }
+}
