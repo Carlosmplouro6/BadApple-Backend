@@ -8,14 +8,14 @@
       href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="./stylesheets/index.css" />
+    <link rel="stylesheet" href="/stylesheets/index.css" />
   </head>
   <body>
     <section class="backgroud">
       <header class="header">
         <div class="logo">
-          <a href="./index.html"
-            ><img src="./imgs/Imagem2.png" alt="Logo BadApple"
+          <a href="/index.html"
+            ><img src="/imgs/Imagem2.png" alt="Logo BadApple"
           /></a>
         </div>
         <nav class="navBar">
@@ -25,7 +25,7 @@
             <span></span>
             <span></span>
             <ul class="menu">
-              <li><a href="./filmes.html">Filmes</a></li>
+              <li><a href="/filmes.html">Filmes</a></li>
               <li><a href="">Personalidades</a></li>
               <li><a href="">Conta</a></li>
             </ul>
@@ -39,35 +39,30 @@
       </section>
 
       <section class="loginSection hidden">
-        <form action="" class="loginForm">
-          <label for="fUsername">Utilizador</label>
-          <input type="text" id="fUsernameLogin" name="fUsername" />
-          <label for="fPassword">Palavra passe</label>
-          <input type="password" id="fPasswordLogin" name="fPassword" />
+        <form action="/api/user/login" method="POST" class="loginForm">
+          <label for="username">Utilizador</label>
+          <input type="text" id="fUsernameLogin" name="username" />
+          <label for="password">Palavra passe</label>
+          <input type="password" id="fPasswordLogin" name="password" />
           <input type="submit" value="Login" class="fButton" />
-          <button class="fButton login">
-            <---
-          </button>
+          <button class="fButton login"><---</button>
         </form>
       </section>
 
       <section class="createSection hidden">
-        <form action="" class="loginForm">
+        <form action="/api/user/create" method="POST" class="loginForm">
           <label for="fUsername">Utilizador</label>
           <input type="text" id="fUsernameCreate" name="fUsername" />
           <label for="fEmail">Email</label>
           <input type="text" id="fEmail" name="fEmail" />
           <label for="fPassword">Palavra passe</label>
           <input type="password" id="fPasswordCreate" name="fPassword" />
-          <input type="submit" value="Login" class="fButton" /><button
-            class="fButton login"
-          >
-            <---
-          </button>
+          <input type="submit" value="Login" class="fButton" />
+          <button class="fButton login"><---</button>
         </form>
       </section>
     </section>
 
-    <script src="./js/main.js"></script>
+    <script src="/js/main.js"></script>
   </body>
 </html>

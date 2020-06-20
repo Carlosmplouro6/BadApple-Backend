@@ -1,35 +1,42 @@
 const LocalStrategy = require("passport-local").Strategy;
+const passport = require("passport");
 const bcrypt = require("bcrypt");
 
 const User = require("../models/userModel");
 
-module.exports = function (passport) {
+module.exports = function () {
   passport.use(
-    new LocalStrategy(
-      { usernameField: "fUsername" },
-      (username, password, done) => {
-        User.getOne(username).then((user) => {
-          if (!user) {
-            return done(null, false, {
-              message: "O nome de utilizador não é valido.",
-            });
-          }
+    new LocalStrategy(async (username, password, done) => {
+      console.log(username);
+      await User.getOne(username).then(async (user) => {
+        console.log(user);
+        if (!user) {
+          console.log("user nao existe");
+          return done(null, false, {
+            message: "O nome de utilizador não é valido.",
+          });
+        }
 
-          bcrypt.compare(password, user.Usr_password, (err, correto) => {
+        await bcrypt.compare(
+          password,
+          user.dados.Usr_password,
+          (err, correto) => {
             if (err) throw err;
             if (correto) {
-              return done(null, user);
+              console.log("login feito");
+              return done(null, user.dados);
             } else {
+              console.log("pass errada");
               return done(null, false, { message: "Password incorreta" });
             }
-          });
-        });
-      }
-    )
+          }
+        );
+      });
+    })
   );
 
   passport.serializeUser(function (user, done) {
-    done(null, user.id);
+    done(null, user.Usr_id);
   });
 
   passport.deserializeUser(function (id, done) {
