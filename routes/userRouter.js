@@ -30,16 +30,18 @@ router.post("/create", (req, res) => {
 router.post(
   "/login",
   passport.authenticate("local", {
-    successRedirect: "/index.html",
     failureRedirect: "/index.html",
     failureFlash: true,
-  })
+  }),
+  function (req, res) {
+    res.redirect("/filmes.html");
+  }
 );
 
 router.get("/logout", (req, res) => {
   req.logout();
   req.flash("success_msg", "Logout bem efectuado");
-  res.redirect("../../index.html");
+  res.redirect("/index.html");
 });
 
 module.exports = router;

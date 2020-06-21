@@ -2,7 +2,7 @@ let categoryButtons = document.getElementsByClassName("categoriaButton");
 const filmesContainer = document.getElementById("filmesContainer");
 const categoriaBay = document.getElementById("categorias");
 
-const Genero_API = "/api/genero";
+const Genero_API = "http://localhost:3000/api/genero";
 
 window.onload = async function getGeneros() {
   const API_CALL = await fetch(Genero_API);

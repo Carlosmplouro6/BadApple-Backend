@@ -3,6 +3,7 @@ const router = express.Router();
 const generoModel = require("../models/generoModel");
 
 router.get("/", async (req, res, next) => {
+  console.log("trying to get genero");
   let resultado = await generoModel.getAll();
   res.status(resultado.status).json(resultado.dados);
 });
