@@ -30,7 +30,7 @@ router.post("/create", (req, res) => {
 router.post(
   "/login",
   passport.authenticate("local", {
-    successRedirect: "/filmes.html",
+    successRedirect: "/index.html",
     failureRedirect: "/index.html",
     failureFlash: true,
   })
