@@ -9,7 +9,7 @@ module.exports.getOne = async (username) => {
     Where Usr_utilizador = ?
     `;
     let user = await pool.query(sql, username);
-    return { status: 200, dados: user[0] };
+    return user[0];
   } catch (err) {
     console.log(err);
     return { status: 500, dados: err };
@@ -18,13 +18,15 @@ module.exports.getOne = async (username) => {
 
 module.exports.getById = async (id) => {
   try {
+    console.log("getting user by id " + id);
     let sql = String.raw`
       select *
       FROM utilizador
       Where Usr_id = ?
       `;
     let user = await pool.query(sql, id);
-    return { status: 200, dados: user };
+    console.log(user);
+    return user[0];
   } catch (err) {
     console.log(err);
     return { status: 500, dados: err };

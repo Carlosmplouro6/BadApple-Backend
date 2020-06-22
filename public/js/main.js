@@ -3,14 +3,19 @@ const createButton = document.getElementsByClassName("create");
 const loginSection = document.getElementsByClassName("loginSection");
 const createSection = document.getElementsByClassName("createSection");
 const buttonsSection = document.getElementsByClassName("buttons");
+const flashSection = document.getElementById("alertMsg");
 
-loginButton[0].addEventListener("click", () => {
-  showLogin();
-});
+for (const button of loginButton) {
+  button.addEventListener("click", () => {
+    showLogin();
+  });
+}
 
-createButton[0].addEventListener("click", () => {
-  showCreate();
-});
+for (const button of createButton) {
+  button.addEventListener("click", () => {
+    showCreate();
+  });
+}
 
 function showLogin() {
   loginSection[0].classList.toggle("hidden");
@@ -20,4 +25,9 @@ function showLogin() {
 function showCreate() {
   createSection[0].classList.toggle("hidden");
   buttonsSection[0].classList.toggle("hidden");
+}
+
+let html = "";
+for (const message in locals.messages) {
+  html += `<p>${message.message}</p>`;
 }

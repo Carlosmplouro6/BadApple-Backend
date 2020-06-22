@@ -29,9 +29,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "/public/")));
-app.set("views", __dirname + "/public/");
-app.engine("html", require("ejs").renderFile);
-app.set("view engine", "html");
 
 app.use(
   session({
@@ -40,11 +37,6 @@ app.use(
     saveUninitialized: true,
   })
 );
-
-app.use(function (req, res, next) {
-  console.log("heythere");
-  next();
-});
 
 app.use(passport.initialize());
 app.use(passport.session());

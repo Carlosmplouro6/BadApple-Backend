@@ -40,6 +40,7 @@ router.post(
 
 router.get("/logout", (req, res) => {
   req.logout();
+  console.log("fazer Logout");
   req.flash("success_msg", "Logout bem efectuado");
   res.redirect("/index.html");
 });

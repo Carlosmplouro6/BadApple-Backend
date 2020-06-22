@@ -17,20 +17,16 @@ module.exports = function () {
           });
         }
 
-        await bcrypt.compare(
-          password,
-          user.dados.Usr_password,
-          (err, correto) => {
-            if (err) throw err;
-            if (correto) {
-              console.log("login feito");
-              return done(null, user.dados);
-            } else {
-              console.log("pass errada");
-              return done(null, false, { message: "Password incorreta" });
-            }
+        await bcrypt.compare(password, user.Usr_password, (err, correto) => {
+          if (err) throw err;
+          if (correto) {
+            console.log("login feito");
+            return done(null, user);
+          } else {
+            console.log("pass errada");
+            return done(null, false, { message: "Password incorreta" });
           }
-        );
+        });
       });
     })
   );
@@ -40,8 +36,8 @@ module.exports = function () {
   });
 
   passport.deserializeUser(function (id, done) {
-    User.getById(id, function (err, user) {
-      done(err, user);
+    User.getById(id).then(function (user) {
+      done(null, user);
     });
   });
 };

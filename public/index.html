@@ -33,6 +33,10 @@
         </nav>
       </header>
 
+      <section>
+        <section id="alertMsg"></section>
+      </section>
+
       <section class="buttons">
         <button class="login mainButton">Entrar</button>
         <button class="create mainButton">Criar Conta</button>
@@ -41,9 +45,19 @@
       <section class="loginSection hidden">
         <form action="/api/user/login" method="POST" class="loginForm">
           <label for="username">Utilizador</label>
-          <input type="text" id="fUsernameLogin" name="username" />
+          <input
+            required="required"
+            type="text"
+            id="fUsernameLogin"
+            name="username"
+          />
           <label for="password">Palavra passe</label>
-          <input type="password" id="fPasswordLogin" name="password" />
+          <input
+            required="required"
+            type="password"
+            id="fPasswordLogin"
+            name="password"
+          />
           <input type="submit" value="Login" class="fButton" />
           <button class="fButton login"><---</button>
         </form>
@@ -52,13 +66,23 @@
       <section class="createSection hidden">
         <form action="/api/user/create" method="POST" class="loginForm">
           <label for="fUsername">Utilizador</label>
-          <input type="text" id="fUsernameCreate" name="fUsername" />
+          <input
+            required="required"
+            type="text"
+            id="fUsernameCreate"
+            name="fUsername"
+          />
           <label for="fEmail">Email</label>
-          <input type="text" id="fEmail" name="fEmail" />
+          <input required="required" type="text" id="fEmail" name="fEmail" />
           <label for="fPassword">Palavra passe</label>
-          <input type="password" id="fPasswordCreate" name="fPassword" />
-          <input type="submit" value="Login" class="fButton" />
-          <button class="fButton login"><---</button>
+          <input
+            required="required"
+            type="password"
+            id="fPasswordCreate"
+            name="fPassword"
+          />
+          <input type="submit" value="Criar" class="fButton" />
+          <button class="fButton create"><---</button>
         </form>
       </section>
     </section>
