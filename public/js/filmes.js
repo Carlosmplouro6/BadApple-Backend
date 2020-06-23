@@ -11,8 +11,6 @@ window.onload = async function getGeneros() {
   }
   const GenerosJson = await API_CALL.json();
 
-  console.log(GenerosJson);
-
   let html = "";
   html += `<button class="categoriaButton ativo" id=todos>Todos</button>`;
   for (const genero of GenerosJson) {

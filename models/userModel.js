@@ -9,7 +9,7 @@ module.exports.getOne = async (username) => {
     Where Usr_utilizador = ?
     `;
     let user = await pool.query(sql, username);
-    return user[0];
+    return { dados: user[0] };
   } catch (err) {
     console.log(err);
     return { status: 500, dados: err };

@@ -20,8 +20,6 @@ for (let i = 0; i < stars.length; i++) {
 }
 
 function setStars(pontos) {
-  console.log("classificou em ");
-  console.log(pontos);
   for (let j = 0; j < parseInt(pontos); j++) {
     if (stars[j].className.includes("unchecked")) {
       stars[j].classList.remove("unchecked");

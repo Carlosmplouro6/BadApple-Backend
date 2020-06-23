@@ -23,6 +23,7 @@ router.post("/create", (req, res) => {
     } else {
       utilizador.Password = await bcrypt.hash(utilizador.Password, 10);
       User.postUser(utilizador);
+      res.redirect("/filmes.html");
     }
   });
 });

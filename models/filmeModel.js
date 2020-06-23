@@ -46,7 +46,7 @@ module.exports.getFilme = async (id) => {
     let sql = String.raw`
     select Fil_id as id, Fil_nome as nome, Fil_Desc as descricao, Fil_Trailer as trailer, Fil_Dur as duracao, Fil_Poster as poster
     FROM filme
-    WHERE Fil_id= ?
+    WHERE Fil_id = ? 
       `;
     let filmes = await pool.query(sql, [id]);
 

@@ -17,22 +17,26 @@ module.exports = function () {
           });
         }
 
-        await bcrypt.compare(password, user.Usr_password, (err, correto) => {
-          if (err) throw err;
-          if (correto) {
-            console.log("login feito");
-            return done(null, user);
-          } else {
-            console.log("pass errada");
-            return done(null, false, { message: "Password incorreta" });
+        await bcrypt.compare(
+          password,
+          user.dados.Usr_password,
+          (err, correto) => {
+            if (err) throw err;
+            if (correto) {
+              console.log("login feito");
+              return done(null, user);
+            } else {
+              console.log("pass errada");
+              return done(null, false, { message: "Password incorreta" });
+            }
           }
-        });
+        );
       });
     })
   );
 
   passport.serializeUser(function (user, done) {
-    done(null, user.Usr_id);
+    done(null, user.dados.Usr_id);
   });
 
   passport.deserializeUser(function (id, done) {

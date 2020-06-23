@@ -10,7 +10,6 @@ module.exports.getOne = async (idFilme, idUser) => {
     let pontuacao = await pool.query(sql, [idFilme, idUser]);
     console.log(pontuacao);
     if (pontuacao == null || pontuacao.length == 0) {
-      console.log("falhou");
       return { status: 203, dados: { valor: "0" } };
     }
     return { status: 200, dados: pontuacao[0] };
@@ -29,8 +28,6 @@ module.exports.postOpi = async (opiniao) => {
     `;
     let Check = await pool.query(CheckSql, [opiniao.idFilme, opiniao.idUser]);
     let resultado;
-    console.log("CheckTheCheck");
-    console.log(Check);
     if (Check == null || Check.length == 0) {
       let Sql = String.raw`
       Insert into opiniao(Opi_valor, Opi_user, Opi_Filme) 
@@ -54,8 +51,6 @@ module.exports.postOpi = async (opiniao) => {
         opiniao.idFilme,
       ]);
     }
-
-    //continuar logica de verificar e alterar caso exista.
 
     console.log(resultado);
     return { status: 200, dados: { resultado } };
