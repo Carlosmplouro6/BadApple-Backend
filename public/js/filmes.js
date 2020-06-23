@@ -5,9 +5,14 @@ const categoriaBay = document.getElementById("categorias");
 const Genero_API = "http://localhost:3000/api/genero";
 
 window.onload = async function getGeneros() {
-  const API_CALL = await fetch(Genero_API, { credentials: "include" });
+  const API_CALL = await fetch(Genero_API);
+  if (API_CALL.status == 401) {
+    window.location.pathname = "index.html";
+  }
   const GenerosJson = await API_CALL.json();
+
   console.log(GenerosJson);
+
   let html = "";
   html += `<button class="categoriaButton ativo" id=todos>Todos</button>`;
   for (const genero of GenerosJson) {
@@ -31,9 +36,9 @@ window.onload = async function getGeneros() {
 async function getMoviesByGen(id) {
   let API_CALL = "";
   if (id === "todos") {
-    API_CALL = await fetch("/api/filmes", { credentials: "include" });
+    API_CALL = await fetch("/api/filmes");
   } else {
-    API_CALL = await fetch(Genero_API + `/${id}`, { credentials: "include" });
+    API_CALL = await fetch(Genero_API + `/${id}`);
   }
 
   const imgURL = "";

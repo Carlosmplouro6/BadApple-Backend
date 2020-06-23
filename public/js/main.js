@@ -3,7 +3,6 @@ const createButton = document.getElementsByClassName("create");
 const loginSection = document.getElementsByClassName("loginSection");
 const createSection = document.getElementsByClassName("createSection");
 const buttonsSection = document.getElementsByClassName("buttons");
-const flashSection = document.getElementById("alertMsg");
 
 for (const button of loginButton) {
   button.addEventListener("click", () => {
@@ -25,9 +24,4 @@ function showLogin() {
 function showCreate() {
   createSection[0].classList.toggle("hidden");
   buttonsSection[0].classList.toggle("hidden");
-}
-
-let html = "";
-for (const message in locals.messages) {
-  html += `<p>${message.message}</p>`;
 }

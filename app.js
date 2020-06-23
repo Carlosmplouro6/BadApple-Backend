@@ -9,6 +9,7 @@ const session = require("express-session");
 const filmeRouter = require("./routes/filmesRouter");
 const generoRouter = require("./routes/generoRouter");
 const userRouter = require("./routes/userRouter");
+const opiniaoRouter = require("./routes/opiniaoRouter");
 const { ensureAuthenticated } = require("./config/auth");
 
 var app = express();
@@ -28,8 +29,7 @@ app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, "/public/")));
-
+app.use(express.static(path.join(__dirname, "/public")));
 app.use(
   session({
     secret: "secret",
@@ -51,5 +51,6 @@ app.use(function (req, res, next) {
 app.use("/api/filmes", filmeRouter);
 app.use("/api/genero", generoRouter);
 app.use("/api/user", userRouter);
+app.use("/api/opiniao", opiniaoRouter);
 
 module.exports = app;

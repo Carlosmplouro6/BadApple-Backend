@@ -54,7 +54,7 @@ module.exports.getFilme = async (id) => {
       return { status: 404, dados: [] };
     }
     let PontuacaoSql = String.raw`
-    SELECT SUM(opi_valor)/COUNT(opi_valor) "media"
+    SELECT SUM(opi_valor)/COUNT(opi_valor) "media", COUNT(opi_valor)"votos"
     FROM filme, utilizador, opiniao
     WHERE  opi_filme=fil_id AND opi_user= usr_id AND Fil_id= ?
     GROUP BY Fil_nome
@@ -69,13 +69,16 @@ module.exports.getFilme = async (id) => {
         duracao: filme.duracao,
         poster: filme.poster,
         media: 0,
+        votos: 0,
       };
       let pontuacao = await pool.query(PontuacaoSql, [filme.id]);
 
       if (pontuacao == null || pontuacao.length == 0) {
         filmeP.media = 0;
+        filmeP.votos = 0;
       } else {
         filmeP.media = pontuacao[0].media;
+        filmeP.votos = pontuacao[0].votos;
       }
       filmesP.push(filmeP);
     }

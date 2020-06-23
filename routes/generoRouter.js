@@ -3,7 +3,12 @@ const router = express.Router();
 const generoModel = require("../models/generoModel");
 
 router.get("/", async (req, res, next) => {
-  //console.log(req.user.Usr_id + " Tentou aceder");
+  try {
+    idUser = req.user.Usr_id;
+  } catch {
+    res.status(401).json("Necessita de efetuar o login para votar");
+    return;
+  }
   let resultado = await generoModel.getAll();
   res.status(resultado.status).json(resultado.dados);
 });
